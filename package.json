@@ -2,11 +2,12 @@
   "name": "bugbuster",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
+"scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "eslint"
+    "build": "next build",             
+    "preview": "npx serve out",        
+    "start": "next start",             
+    "lint": "eslint ."
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
