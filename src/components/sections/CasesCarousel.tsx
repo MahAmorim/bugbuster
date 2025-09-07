@@ -196,7 +196,7 @@ export default function CasesQaacCarousel({
         <div
           ref={railRef}
           className={clsx(
-            "relative mx-auto max-w-7xl overflow-visible",
+            "relative mx-auto max-w-7xl overflow-visible -z-0",
             edgeFade &&
             "[mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent)]"
           )}
