@@ -213,7 +213,7 @@ export default function CasesQaacCarousel({
         >
           {showControls && (
             <>
-              <div className="absolute inset-y-0 left-0 flex items-center pl-4 z-20">
+              <div className="absolute -z-0 inset-y-0 left-0 flex items-center pl-4 z-20">
                 <button
                   type="button"
                   aria-label="Anterior"
@@ -223,7 +223,7 @@ export default function CasesQaacCarousel({
                   ←
                 </button>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-4 z-20">
+              <div className="absolute -z-0 inset-y-0 right-0 flex items-center pr-4 z-20">
                 <button
                   type="button"
                   aria-label="Próximo"
