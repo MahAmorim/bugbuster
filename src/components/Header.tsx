@@ -76,9 +76,10 @@ export default function Header() {
             <li><Link href="/sobre" className="py-2 hover:text-foreground text-muted-foreground">Sobre</Link></li>
             <li><Link href="/manifesto" className="py-2 hover:text-foreground text-muted-foreground">Manifesto</Link></li>
             <li><Link href="/qaac" className="py-2 hover:text-foreground text-muted-foreground">Cultura (QaaC)</Link></li>
-            <li><Link href="/impacto" className="py-2 hover:text-foreground text-muted-foreground">Presença</Link></li>
-            <li><Link href="/voz" className="py-2 hover:text-foreground text-muted-foreground">Voz BugBuster</Link></li>
-            <li><Link href="/parcerias" className="py-2 hover:text-foreground text-muted-foreground">Envolva-se</Link></li>
+            <li><Link href="/building" className="py-2 hover:text-foreground text-muted-foreground">Presença</Link></li>
+            <li><Link href="/building" className="py-2 hover:text-foreground text-muted-foreground">Materiais</Link></li>
+            <li><Link href="/building" className="py-2 hover:text-foreground text-muted-foreground">Voz BugBuster</Link></li>
+            <li><Link href="/together" className="py-2 hover:text-foreground text-muted-foreground">Envolva-se</Link></li>
           </ul>
         </div>
       )}
