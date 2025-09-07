@@ -196,9 +196,9 @@ export default function CasesQaacCarousel({
         <div
           ref={railRef}
           className={clsx(
-            "relative mx-auto max-w-7xl overflow-visible -z-0",
+            "relative mx-auto max-w-7xl overflow-visible z-0",
             edgeFade &&
-            "[mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent)]"
+              "[mask-image: linear-gradient(to right, transparent, black_10%, black_90%, transparent)] -z-10"
           )}
           role="region"
           aria-roledescription="carrossel"
@@ -213,7 +213,7 @@ export default function CasesQaacCarousel({
         >
           {showControls && (
             <>
-              <div className="absolute -z-0 inset-y-0 left-0 flex items-center pl-4 z-20">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 z-20">
                 <button
                   type="button"
                   aria-label="Anterior"
@@ -223,7 +223,7 @@ export default function CasesQaacCarousel({
                   ←
                 </button>
               </div>
-              <div className="absolute -z-0 inset-y-0 right-0 flex items-center pr-4 z-20">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-4 z-20">
                 <button
                   type="button"
                   aria-label="Próximo"

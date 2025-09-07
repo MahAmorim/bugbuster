@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import QaacClient from "./QaacClient"
 
-const site = "https://seu-dominio.com"
+const site = "https://bugbuster-three.vercel.app/"
 
 export const metadata: Metadata = {
   title: "Quality as a Culture (QaaC) | BugBuster Culture",

@@ -8,7 +8,8 @@ import CasesCarousel from "@/components/sections/CasesCarousel"
 
 export default function QaacClient() {
   return (
-    <main className="min-h-screen pt-16 bg-background text-foreground relative">
+    <main className="min-h-screen pt-16 bg-background text-foreground relative z-0">
+
       {/* BG glow sutil */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-pink-500/10 blur-3xl opacity-40" />
 
@@ -84,7 +85,7 @@ export default function QaacClient() {
             ].map((b) => (
               <div key={b.title} className="h-full">
                 <div className="relative border border-border bg-white dark:bg-[#111] rounded-xl shadow-md hover:-translate-y-1 hover:shadow-lg hover:brightness-105 transition-transform h-full">
-                  <div className={`absolute -z-0 top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${b.color}`} />
+                  <div className={`absolute -z-10 top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${b.color}`} />
                   <div className="p-5">
                     <div className="text-2xl mb-3">{b.icon}</div>
                     <h3 className="text-base font-semibold mb-1">{b.title}</h3>
@@ -117,7 +118,7 @@ export default function QaacClient() {
                 key={i}
                 className="relative border border-border bg-white dark:bg-[#111] hover:-translate-y-1 hover:shadow-lg transition-transform shadow-md min-h-[200px]"
               >
-                <div className={`absolute -z-0 top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${item.color}`} />
+                <div className={`absolute -z-10 top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${item.color}`} />
                 <div className="p-6 text-center">
                   <CardHeader className="p-0 mb-2">
                     <CardTitle className="text-lg font-semibold">{item.title}</CardTitle>
@@ -146,7 +147,7 @@ export default function QaacClient() {
                 key={i}
                 className="relative border border-border bg-white dark:bg-[#111] hover:-translate-y-1 hover:shadow-lg transition-transform shadow-md"
               >
-                <div className="absolute -z-0 top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400" />
+                <div className="absolute -z-10 top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400" />
                 <div className="p-6 flex flex-col items-center text-center">
                   <div className="text-3xl mb-3">{p.icon}</div>
                   <CardTitle className="text-lg font-semibold">{p.title}</CardTitle>
