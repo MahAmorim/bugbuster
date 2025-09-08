@@ -11,6 +11,14 @@ import {
 } from "framer-motion"
 import clsx from "clsx"
 import { casesQaac } from "@/data/casesQaac"
+import {
+  CARD_MIN_WIDTH,
+  CARD_GAP,
+  carouselGradients,
+  carouselStrings,
+  defaultCarouselProps,
+  type ProgressStyle,
+} from "@/data/carouselConfig"
 
 export type CasesQaacCarouselProps = {
   speed?: number
@@ -19,24 +27,21 @@ export type CasesQaacCarouselProps = {
   showControls?: boolean
   edgeFade?: boolean
   showProgressBar?: boolean
-  progressStyle?: "bar" | "bounce" | "glow"
+  progressStyle?: ProgressStyle
   className?: string
   ariaLabel?: string
 }
 
-const CARD_MIN_WIDTH = 320
-const GAP = 24
-
 export default function CasesQaacCarousel({
-  speed = 60,
-  autoplay = true,
-  drag = true,
-  showControls = true,
-  edgeFade = true,
-  showProgressBar = true,
-  progressStyle = "bar",
+  speed = defaultCarouselProps.speed,
+  autoplay = defaultCarouselProps.autoplay,
+  drag = defaultCarouselProps.drag,
+  showControls = defaultCarouselProps.showControls,
+  edgeFade = defaultCarouselProps.edgeFade,
+  showProgressBar = defaultCarouselProps.showProgressBar,
+  progressStyle = defaultCarouselProps.progressStyle,
   className,
-  ariaLabel = "Exemplos práticos de Quality as a Culture",
+  ariaLabel = carouselStrings.ariaLabel,
 }: CasesQaacCarouselProps) {
   const controls = useAnimation()
   const railRef = useRef<HTMLDivElement | null>(null)
@@ -53,8 +58,9 @@ export default function CasesQaacCarousel({
   useEffect(() => {
     if (!railRef.current) return
     const update = () => {
-      const w = railRef.current!.clientWidth
-      const n = Math.max(1, Math.floor((w + GAP) / (CARD_MIN_WIDTH + GAP)))
+      if (!railRef.current) return
+      const w = railRef.current.clientWidth
+      const n = Math.max(1, Math.floor((w + CARD_GAP) / (CARD_MIN_WIDTH + CARD_GAP)))
       setItemsPerView(n)
     }
     update()
@@ -68,21 +74,21 @@ export default function CasesQaacCarousel({
     if (!w) return CARD_MIN_WIDTH
     return Math.max(
       CARD_MIN_WIDTH,
-      Math.floor((w - GAP * (itemsPerView - 1)) / itemsPerView)
+      Math.floor((w - CARD_GAP * (itemsPerView - 1)) / itemsPerView)
     )
   }, [itemsPerView])
 
   const items = useMemo(() => [...casesQaac, ...casesQaac], [])
   const TOTAL_WIDTH = useMemo(
-    () => (widthPerCard + GAP) * casesQaac.length,
+    () => (widthPerCard + CARD_GAP) * casesQaac.length,
     [widthPerCard]
   )
-  const STEP = widthPerCard + GAP
+  const STEP = widthPerCard + CARD_GAP
 
   const totalDuration = TOTAL_WIDTH / Math.max(1, speed)
   const barDuration = totalDuration / casesQaac.length
 
-  // autoplay
+  // autoplay linear
   useEffect(() => {
     if (!autoplay || paused || reduceMotion || !inView) return
     let cancelled = false
@@ -115,8 +121,7 @@ export default function CasesQaacCarousel({
   const handleUpdate = (latest: { x?: number }) => {
     const currentX = latest?.x ?? 0
     if (currentX <= -TOTAL_WIDTH) controls.set({ x: 0 })
-    if (currentX > 0)
-      controls.set({ x: -TOTAL_WIDTH + (currentX % TOTAL_WIDTH) })
+    if (currentX > 0) controls.set({ x: -TOTAL_WIDTH + (currentX % TOTAL_WIDTH) })
 
     const absX = Math.abs(currentX) % TOTAL_WIDTH
     const slideIndex = Math.round(absX / STEP) % casesQaac.length
@@ -132,11 +137,9 @@ export default function CasesQaacCarousel({
     setPaused(false)
   }
 
-  // classes reaproveitadas
   const btnClass =
     "h-10 w-10 flex items-center justify-center rounded-full bg-background text-foreground ring-1 ring-border shadow-md hover:bg-primary hover:text-primary-foreground transition-colors"
 
-  // renderiza indicador de progresso
   const renderIndicator = (i: number) => {
     if (progressStyle === "bar") {
       return (
@@ -157,10 +160,7 @@ export default function CasesQaacCarousel({
       return (
         <motion.span
           key={i}
-          className={clsx(
-            "h-3 w-3 rounded-full",
-            i === activeIndex ? "bg-primary" : "bg-muted"
-          )}
+          className={clsx("h-3 w-3 rounded-full", i === activeIndex ? "bg-primary" : "bg-muted")}
           animate={i === activeIndex ? { scale: [1, 1.4, 1] } : { scale: 1 }}
           transition={{ duration: 0.4 }}
         />
@@ -172,9 +172,7 @@ export default function CasesQaacCarousel({
           key={i}
           className={clsx(
             "h-3 w-3 rounded-full transition-colors",
-            i === activeIndex
-              ? "bg-primary shadow-[0_0_8px_rgba(59,130,246,0.7)]"
-              : "bg-muted"
+            i === activeIndex ? "bg-primary shadow-[0_0_8px_rgba(59,130,246,0.7)]" : "bg-muted"
           )}
         />
       )
@@ -186,19 +184,20 @@ export default function CasesQaacCarousel({
     <section className={clsx("py-20 bg-muted/30", className)}>
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-2xl md:text-3xl font-bold mb-6">
-          QaaC em ação: exemplos práticos
+          {carouselStrings.title}
         </h2>
         <p className="text-lg text-muted-foreground mb-10 max-w-3xl mx-auto">
-          Veja como aplicar o QaaC para acelerar com confiança e reduzir retrabalho.<br />
+          {carouselStrings.subtitle}
+          <br />
           Deslize pelos exemplos abaixo.
         </p>
 
         <div
           ref={railRef}
           className={clsx(
-            "relative mx-auto max-w-7xl overflow-visible z-0",
+            "relative mx-auto max-w-7xl overflow-hidden z-0",
             edgeFade &&
-              "[mask-image: linear-gradient(to right, transparent, black_10%, black_90%, transparent)] -z-10"
+              "[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]"
           )}
           role="region"
           aria-roledescription="carrossel"
@@ -251,13 +250,15 @@ export default function CasesQaacCarousel({
             {items.map((c, i) => (
               <div
                 key={`${c.title}-${i}`}
-                className="flex-shrink-0 p-[2px] rounded-2xl bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-400 
-                  transition-transform hover:-translate-y-1"
+                className={clsx(
+                  "flex-shrink-0 p-[2px] rounded-2xl bg-gradient-to-r",
+                  carouselGradients.card,
+                  "transition-transform hover:-translate-y-1"
+                )}
                 style={{ minWidth: widthPerCard, width: widthPerCard }}
                 tabIndex={0}
               >
-                <div className="bg-background rounded-2xl p-6 h-[clamp(220px,26vh,280px)] flex flex-col justify-between text-left 
-                                transition-all duration-200 hover:shadow-xl hover:brightness-105">
+                <div className="bg-background rounded-2xl p-6 h-[clamp(220px,26vh,280px)] flex flex-col justify-between text-left transition-all duration-200 hover:shadow-xl hover:brightness-105">
                   <div className="text-3xl">{c.icon}</div>
                   <div>
                     <h3 className="text-lg font-semibold mb-2">{c.title}</h3>
@@ -275,15 +276,12 @@ export default function CasesQaacCarousel({
           </div>
         )}
 
-        {/* CTA final */}
         <div className="mt-12 text-center">
           <a
-            href="/impacto"
-            className="inline-block px-6 py-3 rounded-xl font-medium 
-                     bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 
-                     text-white shadow-lg transition-transform hover:scale-105"
+            href={carouselStrings.cta.href}
+            className="inline-block px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 text-white shadow-lg transition-transform hover:scale-105"
           >
-            Ver impacto do QaaC
+            {carouselStrings.cta.label}
           </a>
         </div>
       </div>

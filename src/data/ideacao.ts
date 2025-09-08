@@ -1,5 +1,5 @@
 // data/ideacao.ts
-import { type TimelineItem } from "@/app/sobre/IdeacaoTimeline"
+import { type TimelineItem } from "@/components/sections/IdeacaoTimeline"
 
 export const ideacaoItems: TimelineItem[] = [
   {
