@@ -7,8 +7,8 @@ import { Suspense } from "react"
 import "./globals.css"
 
 // Importando o Header e Footer globais
-import Header from "@/components/Header"
-import Footer from "@/components/Footer"
+import Header from "@/components/layout/Header"
+import Footer from "@/components/layout/Footer"
 
 export const metadata: Metadata = {
   title: "🐞⚡ Bugbuster Culture — Qualidade como Cultura",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Marcela Amorim", url: "https://linktr.ee/qa.marcelaamorim" }],
   openGraph: {
     type: "website",
-    url: "https://bugbusterculture.github.io/",
+    url: "https://bugbuster-three.vercel.app/",
     siteName: "Bugbuster Culture",
     title: "Bugbuster Culture — Qualidade como Cultura",
     description:
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
       "Qualidade como atitude, não como fase. Conheça o manifesto, soluções, QaaC e próximos passos do movimento Bugbuster.",
     images: ["https://bugbusterculture.github.io/og-image.png"],
   },
-  metadataBase: new URL("https://bugbusterculture.github.io"),
+  metadataBase: new URL("https://bugbuster-three.vercel.app/"),
   alternates: {
     canonical: "https://bugbusterculture.github.io",
   },

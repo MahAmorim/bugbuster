@@ -1,112 +1,169 @@
+/* =========================
+   Imports (Tailwind v4+)
+   ========================= */
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Variant dark por classe no <html> */
 @custom-variant dark (&:is(.dark *));
 
+/* =========================
+   Design Tokens (OKLCH)
+   ========================= */
 :root {
-  /* Updated color tokens to match Bugbuster Culture design with blue/purple theme */
+  /* Tip: manter consistente: background/popover/input/card no mesmo “nível” */
   --background: oklch(0.99 0.005 106.423);
   --foreground: oklch(0.25 0.01 258.338);
+
   --card: oklch(0.97 0.005 106.423);
-  --card-foreground: oklch(0.25 0.01 258.338);
-  --popover: oklch(0.99 0.005 106.423);
-  --popover-foreground: oklch(0.25 0.01 258.338);
+  --card-foreground: var(--foreground);
+
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+
   --primary: oklch(0.45 0.12 240.123);
-  --primary-foreground: oklch(0.99 0.005 106.423);
+  --primary-foreground: var(--background);
+
   --secondary: oklch(0.95 0.008 258.338);
-  --secondary-foreground: oklch(0.25 0.01 258.338);
+  --secondary-foreground: var(--foreground);
+
   --muted: oklch(0.95 0.008 258.338);
   --muted-foreground: oklch(0.45 0.01 258.338);
+
   --accent: oklch(0.55 0.15 292.885);
-  --accent-foreground: oklch(0.99 0.005 106.423);
+  --accent-foreground: var(--background);
+
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.99 0.005 106.423);
+  --destructive-foreground: var(--background);
+
   --border: oklch(0.92 0.008 258.338);
-  --input: oklch(0.99 0.005 106.423);
+  --input: var(--background);
   --ring: oklch(0.55 0.15 292.885 / 0.3);
-  --chart-1: oklch(0.45 0.12 240.123);
-  --chart-2: oklch(0.55 0.15 292.885);
+
+  /* Charts */
+  --chart-1: var(--primary);
+  --chart-2: var(--accent);
   --chart-3: oklch(0.4 0.1 258.338);
-  --chart-4: oklch(0.577 0.245 27.325);
+  --chart-4: var(--destructive);
   --chart-5: oklch(0.65 0.15 45.123);
+
+  /* Radius */
   --radius: 0.75rem;
-  --sidebar: oklch(0.97 0.005 106.423);
-  --sidebar-foreground: oklch(0.25 0.01 258.338);
-  --sidebar-primary: oklch(0.45 0.12 240.123);
-  --sidebar-primary-foreground: oklch(0.99 0.005 106.423);
-  --sidebar-accent: oklch(0.55 0.15 292.885);
-  --sidebar-accent-foreground: oklch(0.99 0.005 106.423);
-  --sidebar-border: oklch(0.92 0.008 258.338);
-  --sidebar-ring: oklch(0.55 0.15 292.885 / 0.3);
+
+  /* Sidebar */
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--background);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--background);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  /* Gradiente “marca” reaproveitável */
+  --grad-brand: linear-gradient(to right, #a855f7, #3b82f6, #06b6d4);
+
+  /* Sombreados padrão (elevation) */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 10px rgba(0,0,0,.10);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,.15);
+
+  color-scheme: light;
 }
 
 .dark {
-  /* Updated dark theme colors to match Bugbuster Culture dark aesthetic */
   --background: oklch(0.08 0.008 258.338);
   --foreground: oklch(0.92 0.008 106.423);
+
   --card: oklch(0.12 0.01 258.338);
-  --card-foreground: oklch(0.92 0.008 106.423);
-  --popover: oklch(0.08 0.008 258.338);
-  --popover-foreground: oklch(0.92 0.008 106.423);
+  --card-foreground: var(--foreground);
+
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+
   --primary: oklch(0.55 0.15 292.885);
-  --primary-foreground: oklch(0.08 0.008 258.338);
+  --primary-foreground: var(--background);
+
   --secondary: oklch(0.16 0.015 258.338);
-  --secondary-foreground: oklch(0.92 0.008 106.423);
+  --secondary-foreground: var(--foreground);
+
   --muted: oklch(0.16 0.015 258.338);
   --muted-foreground: oklch(0.65 0.01 258.338);
+
   --accent: oklch(0.45 0.12 240.123);
-  --accent-foreground: oklch(0.08 0.008 258.338);
+  --accent-foreground: var(--background);
+
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.92 0.008 106.423);
+  --destructive-foreground: var(--foreground);
+
   --border: oklch(0.16 0.015 258.338);
-  --input: oklch(0.16 0.015 258.338);
+  --input: var(--border);
   --ring: oklch(0.55 0.15 292.885 / 0.3);
-  --chart-1: oklch(0.55 0.15 292.885);
+
+  --chart-1: var(--primary);
   --chart-2: oklch(0.45 0.12 240.123);
   --chart-3: oklch(0.65 0.15 45.123);
-  --chart-4: oklch(0.577 0.245 27.325);
+  --chart-4: var(--destructive);
   --chart-5: oklch(0.7 0.12 200.123);
-  --sidebar: oklch(0.12 0.01 258.338);
-  --sidebar-foreground: oklch(0.92 0.008 106.423);
-  --sidebar-primary: oklch(0.55 0.15 292.885);
-  --sidebar-primary-foreground: oklch(0.08 0.008 258.338);
-  --sidebar-accent: oklch(0.45 0.12 240.123);
-  --sidebar-accent-foreground: oklch(0.08 0.008 258.338);
-  --sidebar-border: oklch(0.16 0.015 258.338);
-  --sidebar-ring: oklch(0.55 0.15 292.885 / 0.3);
+
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--background);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--background);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+
+  color-scheme: dark;
 }
 
+/* =========================
+   Tailwind Theme Bridge
+   ========================= */
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -117,85 +174,184 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* =========================
+   Base Layer
+   ========================= */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  /* Evita poluir tudo com outline: deixa só ring em focus-visible */
+  *:focus {
+    outline: none;
   }
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Border padrão apenas como color token (sem forçar width em *). */
+  * {
+    @apply border-border;
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-synthesis-weight: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
   }
 }
 
+/* =========================
+   Components Layer
+   ========================= */
 @layer components {
-.card-border-gradient {
-  @apply relative rounded-2xl p-[2px];
-}
+  /* Superfície com borda gradiente reaproveitável */
+  .card-border-gradient {
+    position: relative;
+    border-radius: 1rem; /* 2xl */
+    padding: 2px;
+    background: var(--grad-brand);
+  }
+  .card-border-gradient > .surface {
+    border-radius: inherit;
+    background: var(--color-card);
+    color: var(--color-card-foreground);
+  }
 
+  /* Botões */
   .btn-outline {
-    @apply border-2 border-primary/60 text-primary hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200;
+    @apply border-2 text-primary transition-all duration-200 rounded-lg;
+    border-color: color-mix(in oklch, var(--primary) 60%, transparent);
   }
-
+  .btn-outline:hover {
+    @apply text-primary-foreground;
+    background: var(--primary);
+    border-color: var(--primary);
+  }
   .dark .btn-outline {
-    @apply border-primary/70 hover:border-primary;
+    border-color: color-mix(in oklch, var(--primary) 70%, transparent);
+  }
+
+  .btn-gradient {
+    @apply text-white rounded-lg transition;
+    background: var(--grad-brand);
+  }
+
+  .btn-border-gradient {
+    position: relative;
+    color: white;
+    border-radius: 0.5rem;
+    background: transparent;
+    transition: .2s ease;
+  }
+  .btn-border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px; /* espessura da borda */
+    background: var(--grad-brand);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    z-index: -1;
+  }
+  .btn-border-gradient:hover {
+    filter: brightness(1.05);
+  }
+
+  .btn-gradient-glow {
+    @apply text-white rounded-lg transition;
+    background: var(--grad-brand);
+    box-shadow: 0 0 20px rgba(59,130,246,.40);
+  }
+  .btn-gradient-glow:hover {
+    box-shadow: 0 0 30px rgba(59,130,246,.60);
   }
 }
 
-.btn-gradient {
-  @apply bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 text-white hover:opacity-90 transition;
+/* =========================
+   Utilities Layer
+   ========================= */
+@layer utilities {
+  /* Gradiente animado para títulos */
+  .animate-gradient {
+    background-image: var(--grad-brand);
+    background-size: 200% 200%;
+    animation: gradient-flow 6s ease infinite;
+    -webkit-background-clip: text;
+            background-clip: text;
+    color: transparent;
+  }
+
+  /* Utilitário de fade nas bordas horizontais (para carrossel) */
+  .mask-x-fade {
+    --fade-edge: 10%;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black var(--fade-edge),
+      black calc(100% - var(--fade-edge)),
+      transparent
+    );
+            mask-image: linear-gradient(
+      to right,
+      transparent,
+      black var(--fade-edge),
+      black calc(100% - var(--fade-edge)),
+      transparent
+    );
+    -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+  }
+
+  /* Estados de elevação */
+  .elevation-sm { box-shadow: var(--shadow-sm); }
+  .elevation-md { box-shadow: var(--shadow-md); }
+  .elevation-lg { box-shadow: var(--shadow-lg); }
+
+  /* “Desativar” conteúdo quando o menu mobile está aberto */
+  .menu-open main {
+    filter: blur(1.5px) brightness(0.9);
+    pointer-events: none;
+    user-select: none;
+    touch-action: none;
+  }
 }
 
-/* Botão com borda gradiente */
-.btn-border-gradient {
-  @apply relative bg-gray-900 text-white transition rounded-lg;
-}
-
-.btn-border-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px; /* espessura da borda */
-  background: linear-gradient(to right, #a855f7, #3b82f6, #06b6d4);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  z-index: -1;
-}
-
-/* Botão com glow no gradiente */
-.btn-gradient-glow {
-  @apply bg-gradient-to-r from-purple-400 via-blue-500 to-cyan-400 text-white transition rounded-lg;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); /* azul glow */
-}
-.btn-gradient-glow:hover {
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
-}
-
-
-
-
-/* Gradiente animado no título */
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-flow 6s ease infinite;
-}
+/* =========================
+   Animations (com motion-safe)
+   ========================= */
 @keyframes gradient-flow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+@keyframes pulse-glow {
+  0%,100% { box-shadow: 0 0 20px rgba(59,130,246,.40); }
+  50% { box-shadow: 0 0 35px rgba(59,130,246,.70); }
+}
 
-/* Glow pulsante no botão */
+/* só anima se o usuário não pedir redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient,
+  .glow-pulse {
+    animation: none !important;
+  }
+}
+
+/* classe para ligar/desligar o glow por CSS utilitário */
 .glow-pulse {
   animation: pulse-glow 3s ease-in-out infinite;
-}
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
-  50% { box-shadow: 0 0 35px rgba(59, 130, 246, 0.7); }
-}
-
-html {
-  scroll-behavior: smooth;
 }
